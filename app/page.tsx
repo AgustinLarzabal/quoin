@@ -1,3 +1,10 @@
+import { ModeToggle } from "@/components/mode-toggle";
+
 export default function Home() {
-  return <main>Hello world</main>;
+  return (
+    <main>
+      <ModeToggle />
+      Hello world
+    </main>
+  );
 }
