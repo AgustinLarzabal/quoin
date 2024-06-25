@@ -3,6 +3,7 @@ import { loginSchema, signUpSchema } from "@/app/(public)/schemas";
 import { signIn } from "@/auth";
 import { getUserByEmail } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { generateVerificationToken } from "@/lib/tokens";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
@@ -16,6 +17,20 @@ export const login = async (values: z.infer<typeof loginSchema>) => {
   }
 
   const { email, password } = validatedFields.data;
+
+  const existingUser = await getUserByEmail(email);
+
+  if (!existingUser || !existingUser.email || !existingUser.password) {
+    return { error: "Email does not exist!" };
+  }
+
+  if (!existingUser.emailVerified) {
+    const verificationToken = await generateVerificationToken(
+      existingUser.email
+    );
+
+    return { success: "Confirmation email sent!" };
+  }
 
   try {
     await signIn("credentials", {
@@ -61,7 +76,9 @@ export const signUp = async (values: z.infer<typeof signUpSchema>) => {
     },
   });
 
+  const verificationToken = await generateVerificationToken(email);
+
   // TODO: Send verification token email
 
-  return { success: "User created!" };
+  return { success: "Confirmation email sent!" };
 };
