@@ -1,5 +1,6 @@
 "use client";
 
+import { loginSchema } from "@/app/(public)/schemas";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,22 +16,17 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const formSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
-  password: z.string({ message: "Invalid password" }),
-});
-
 export function LoginForm() {
   const router = useRouter();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof loginSchema>) {
     const user = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
       method: "POST",
       headers: {
