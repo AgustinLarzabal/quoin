@@ -1,11 +1,11 @@
 import Image from "next/image";
 
-type CoinProps = {
+interface CoinProps {
   name: string;
   country: string;
   year: string;
   cover: string;
-};
+}
 
 export function Coin({ name, country, year, cover }: CoinProps) {
   return (

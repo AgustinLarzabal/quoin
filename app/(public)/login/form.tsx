@@ -1,6 +1,8 @@
 "use client";
 
 import { loginSchema } from "@/app/(public)/schemas";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -70,6 +72,8 @@ export function LoginForm() {
             </FormItem>
           )}
         />
+        <FormError message="" />
+        <FormSuccess message="" />
         <Button type="submit" className="w-full">
           Login
         </Button>
