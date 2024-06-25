@@ -7,3 +7,4 @@
 - [ ] Move JWP from localStorage to a cookie
 - [ ] Validate fields in login/register
 - [ ] Make a reusable component for the login/signup card
+- [ ] Make error auth page for when trying to login with two different providers but same email
