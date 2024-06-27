@@ -14,3 +14,4 @@
 - [ ] Fix error " Extra attributes from the server: class" (next-themes)
 - [ ] Add password confirmation on forms
 - [ ] Add 2FA
+- [ ] Fix tooltip for the mode toggle
