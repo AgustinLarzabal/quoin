@@ -1,10 +1,13 @@
 "use server";
-import { loginSchema, signUpSchema } from "@/app/(public)/schemas";
+import { loginSchema, resetSchema, signUpSchema } from "@/app/(public)/schemas";
 import { signIn } from "@/auth";
 import { getUserByEmail } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { sendVerificationEmail } from "@/lib/mail";
-import { generateVerificationToken } from "@/lib/tokens";
+import { sendPasswordResetEmail, sendVerificationEmail } from "@/lib/mail";
+import {
+  generatePasswordResetToken,
+  generateVerificationToken,
+} from "@/lib/tokens";
 import { getVerificationTokenByToken } from "@/lib/verification-token";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import bcrypt from "bcryptjs";
@@ -122,4 +125,28 @@ export const newVerification = async (token: string) => {
   });
 
   return { success: "Email verified!" };
+};
+
+export const reset = async (values: z.infer<typeof resetSchema>) => {
+  const validatedFields = resetSchema.safeParse(values);
+
+  if (!validatedFields.success) {
+    return { error: "Invalid email!" };
+  }
+
+  const { email } = validatedFields.data;
+
+  const existingUser = await getUserByEmail(email);
+
+  if (!existingUser) {
+    return { error: "Email not found!" };
+  }
+
+  const passwordResetToken = await generatePasswordResetToken(email);
+  await sendPasswordResetEmail(
+    passwordResetToken.email,
+    passwordResetToken.token
+  );
+
+  return { success: "Reset email sent!" };
 };

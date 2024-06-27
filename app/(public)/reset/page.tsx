@@ -1,5 +1,6 @@
 "use client";
 
+import { reset } from "@/actions/auth";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,7 @@ import {
 import { Icons } from "@/components/ui/icons";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -42,7 +44,12 @@ export default function Reset() {
     setError("");
     setSuccess("");
 
-    console.log("values", values);
+    startTransition(() => {
+      reset(values).then((data) => {
+        setError(data?.error);
+        setSuccess(data?.success);
+      });
+    });
   }
 
   return (
@@ -83,6 +90,12 @@ export default function Reset() {
               </Button>
             </form>
           </Form>
+        </div>
+        <div className="mt-4 text-center text-sm">
+          Back to{" "}
+          <Link href="/login" className="underline">
+            Sign in
+          </Link>
         </div>
       </CardContent>
     </Card>
