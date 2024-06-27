@@ -17,3 +17,7 @@ export const signUpSchema = z.object({
 export const resetSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
 });
+
+export const newPasswordSchema = z.object({
+  password: z.string({ message: "Minimun 6 characters required" }).min(6),
+});
