@@ -1,4 +1,5 @@
 import { auth, signOut } from "@/auth";
+import { Flag } from "@/components/flags/flags";
 // import { Coin } from "@/components/coin";
 
 // export interface ICoin {
@@ -28,11 +29,21 @@ export default async function Home() {
       <div className="flex items-center">
         <h1 className="text-lg font-semibold md:text-2xl">Coin Catalog</h1>
       </div>
-      <div className="flex flex-wrap gap-4">
-        {JSON.stringify(session)}
-        {/* {data.map((coin: ICoin) => (
+      <div className="flex flex-col flex-wrap gap-4">
+        <div>
+          {JSON.stringify(session)}
+          {/* {data.map((coin: ICoin) => (
           <Coin key={coin.id} {...coin} />
-        ))} */}
+          ))} */}
+        </div>
+        <div>
+          <Flag code="au" />
+          <Flag code="ar" />
+          <Flag code="cn" />
+          <Flag code="es" />
+          <Flag code="us" />
+          <Flag code="za" />
+        </div>
 
         <form
           action={async () => {
