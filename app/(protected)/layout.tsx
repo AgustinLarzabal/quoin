@@ -1,23 +1,19 @@
-import { MainHeader, MainSidebar } from "@/components";
+import { MainHeader, MainSidebar } from "@/components/layout";
 
 import "@/styles/globals.css";
 
-export default function RootLayout({
+export default function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html>
-      <body>
-        <div className="grid h-screen w-full pl-[53px]">
-          <MainSidebar />
-          <div className="flex flex-col">
-            <MainHeader />
-            {children}
-          </div>
-        </div>
-      </body>
-    </html>
+    <div className="grid h-screen w-full pl-[53px]">
+      <MainSidebar />
+      <div className="flex flex-col">
+        <MainHeader />
+        {children}
+      </div>
+    </div>
   );
 }

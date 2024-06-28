@@ -10,7 +10,7 @@ import { z } from "zod";
 
 import { login } from "@/actions/auth";
 import { LoginSchema } from "@/app/(public)/schemas";
-import { FormError, FormSuccess } from "@/components";
+import { FormError, FormSuccess } from "@/components/auth";
 import {
   Button,
   Form,

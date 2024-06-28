@@ -9,7 +9,7 @@ import { z } from "zod";
 
 import { newPassword } from "@/actions/auth";
 import { NewPasswordSchema } from "@/app/(public)/schemas";
-import { FormError, FormSuccess } from "@/components";
+import { FormError, FormSuccess } from "@/components/auth";
 import {
   Button,
   Card,

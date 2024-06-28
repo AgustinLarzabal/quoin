@@ -9,7 +9,7 @@ import { z } from "zod";
 
 import { signUp } from "@/actions/auth";
 import { SignUpSchema } from "@/app/(public)/schemas";
-import { FormError, FormSuccess } from "@/components";
+import { FormError, FormSuccess } from "@/components/auth";
 import {
   Button,
   Form,

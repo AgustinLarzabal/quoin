@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 import { newVerification } from "@/actions/auth";
-import { FormError, FormSuccess } from "@/components";
+import { FormError, FormSuccess } from "@/components/auth";
 import {
   Card,
   CardContent,

@@ -8,7 +8,7 @@ import { z } from "zod";
 
 import { reset } from "@/actions/auth";
 import { ResetSchema } from "@/app/(public)/schemas";
-import { FormError, FormSuccess } from "@/components";
+import { FormError, FormSuccess } from "@/components/auth";
 import {
   Button,
   Card,
