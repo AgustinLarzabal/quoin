@@ -1,6 +1,6 @@
 import { FormCard, FormNewPassword } from "@/components/auth";
 
-export default function NewPassword() {
+export default function NewPasswordPage() {
   return (
     <FormCard
       cta="Back to"

@@ -1,6 +1,6 @@
 import { FormCard, SignUpForm } from "@/components/auth";
 
-export default function SignUp() {
+export default function SignUpPage() {
   return (
     <FormCard
       cta="Already have an account?"

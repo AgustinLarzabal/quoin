@@ -1,6 +1,6 @@
 import { FormCard, FormNewVerification } from "@/components/auth";
 
-export default function NewVerification() {
+export default function NewVerificationPage() {
   return (
     <FormCard
       cta="Back to"

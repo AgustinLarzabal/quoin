@@ -1,6 +1,6 @@
 import { FormCard, FormLogin } from "@/components/auth";
 
-export default function Login() {
+export default function LoginPage() {
   return (
     <FormCard
       cta="Don't have an account?"

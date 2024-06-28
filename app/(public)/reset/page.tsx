@@ -1,6 +1,6 @@
 import { FormCard, FormReset } from "@/components/auth";
 
-export default function Reset() {
+export default function ResetPage() {
   return (
     <FormCard
       cta="Back to"
