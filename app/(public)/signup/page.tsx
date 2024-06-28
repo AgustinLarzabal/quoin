@@ -1,32 +1,15 @@
-import Link from "next/link";
-
-import { SignUpForm } from "@/app/(public)/signup/form";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui";
+import { FormCard, SignUpForm } from "@/components/auth";
 
 export default function SignUp() {
   return (
-    <Card className="mx-auto max-w-sm">
-      <CardHeader>
-        <CardTitle className="text-xl">Sign Up</CardTitle>
-        <CardDescription>
-          Enter your information to create an account
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <SignUpForm />
-        <div className="mt-4 text-center text-sm">
-          Already have an account?{" "}
-          <Link href="/login" className="underline">
-            Sign in
-          </Link>
-        </div>
-      </CardContent>
-    </Card>
+    <FormCard
+      cta="Already have an account?"
+      ctaLabel="Login"
+      ctaHref="/login"
+      description="Enter your information to create an account"
+      title="Sign Up"
+    >
+      <SignUpForm />
+    </FormCard>
   );
 }

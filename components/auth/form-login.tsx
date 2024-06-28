@@ -24,7 +24,7 @@ import {
 } from "@/components/ui";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
-export function LoginForm() {
+export function FormLogin() {
   // const router = useRouter();
   const searchParams = useSearchParams();
   const urlError =
