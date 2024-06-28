@@ -1,19 +1,19 @@
 "use client";
 
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+
 import { newVerification } from "@/actions/auth";
-import { FormError } from "@/components/form-error";
-import { FormSuccess } from "@/components/form-success";
+import { FormError, FormSuccess } from "@/components";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Icons } from "@/components/ui/icons";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+  Icons,
+} from "@/components/ui";
 
 export default function NewVerification() {
   const searchParams = useSearchParams();

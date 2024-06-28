@@ -1,6 +1,8 @@
-export { AR } from "./ar";
-export { AU } from "./au";
-export { CN } from "./cn";
-export { ES } from "./es";
-export { US } from "./us";
-export { ZA } from "./za";
+export * from "./flags";
+
+export * from "./ar";
+export * from "./au";
+export * from "./cn";
+export * from "./es";
+export * from "./us";
+export * from "./za";

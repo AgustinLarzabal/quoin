@@ -1,27 +1,27 @@
 "use client";
 
-import { signUp } from "@/actions/auth";
-import { signUpSchema } from "@/app/(public)/schemas";
-import { FormError } from "@/components/form-error";
-import { FormSuccess } from "@/components/form-success";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Icons } from "@/components/ui/icons";
-import { Input } from "@/components/ui/input";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+import { signUp } from "@/actions/auth";
+import { SignUpSchema } from "@/app/(public)/schemas";
+import { FormError, FormSuccess } from "@/components";
+import {
+  Button,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Icons,
+  Input,
+} from "@/components/ui";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 export function SignUpForm() {
   const router = useRouter();
@@ -30,8 +30,8 @@ export function SignUpForm() {
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof signUpSchema>>({
-    resolver: zodResolver(signUpSchema),
+  const form = useForm<z.infer<typeof SignUpSchema>>({
+    resolver: zodResolver(SignUpSchema),
     defaultValues: {
       email: "",
       firstname: "",
@@ -40,7 +40,7 @@ export function SignUpForm() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof signUpSchema>) {
+  async function onSubmit(values: z.infer<typeof SignUpSchema>) {
     setError("");
     setSuccess("");
 

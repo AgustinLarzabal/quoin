@@ -1,5 +1,5 @@
-import { MainHeader } from "@/components/main-header";
-import { MainSidebar } from "@/components/main-sidebar";
+import { MainHeader, MainSidebar } from "@/components";
+
 import "@/styles/globals.css";
 
 export default function RootLayout({

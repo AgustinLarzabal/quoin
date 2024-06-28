@@ -1,14 +1,16 @@
 "use server";
-import { signUpSchema } from "@/app/(public)/schemas";
+
+import bcrypt from "bcryptjs";
+import { z } from "zod";
+
+import { SignUpSchema } from "@/app/(public)/schemas";
 import { getUserByEmail } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { sendVerificationEmail } from "@/lib/mail";
 import { generateVerificationToken } from "@/lib/tokens";
-import bcrypt from "bcryptjs";
-import { z } from "zod";
 
-export const signUp = async (values: z.infer<typeof signUpSchema>) => {
-  const validatedFields = signUpSchema.safeParse(values);
+export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
+  const validatedFields = SignUpSchema.safeParse(values);
 
   if (!validatedFields.success) {
     return { error: "Invalid fields" };

@@ -1,4 +1,4 @@
-import { loginSchema } from "@/app/(public)/schemas";
+import { LoginSchema } from "@/app/(public)/schemas";
 import { getUserByEmail } from "@/lib/auth";
 import bcrypt from "bcryptjs";
 import type { NextAuthConfig } from "next-auth";
@@ -13,7 +13,7 @@ export default {
     }),
     Credentials({
       async authorize(credentials) {
-        const validatedFields = loginSchema.safeParse(credentials);
+        const validatedFields = LoginSchema.safeParse(credentials);
 
         if (validatedFields.success) {
           const { email, password } = validatedFields.data;

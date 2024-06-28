@@ -1,12 +1,13 @@
+import { Settings2, Triangle } from "lucide-react";
+
 import { ModeToggle } from "@/components/mode-toggle";
-import { Button } from "@/components/ui/button";
 import {
+  Button,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Settings2, Triangle } from "lucide-react";
+} from "@/components/ui";
 
 export function MainSidebar() {
   return (

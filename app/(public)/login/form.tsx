@@ -1,21 +1,5 @@
 "use client";
 
-import { login } from "@/actions/auth";
-import { loginSchema } from "@/app/(public)/schemas";
-import { FormError } from "@/components/form-error";
-import { FormSuccess } from "@/components/form-success";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Icons } from "@/components/ui/icons";
-import { Input } from "@/components/ui/input";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
@@ -23,6 +7,22 @@ import { useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+import { login } from "@/actions/auth";
+import { LoginSchema } from "@/app/(public)/schemas";
+import { FormError, FormSuccess } from "@/components";
+import {
+  Button,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Icons,
+  Input,
+} from "@/components/ui";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 export function LoginForm() {
   // const router = useRouter();
@@ -36,15 +36,15 @@ export function LoginForm() {
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof loginSchema>) {
+  async function onSubmit(values: z.infer<typeof LoginSchema>) {
     setError("");
     setSuccess("");
 

@@ -1,12 +1,14 @@
 "use server";
-import { resetSchema } from "@/app/(public)/schemas";
+
+import { z } from "zod";
+
+import { ResetSchema } from "@/app/(public)/schemas";
 import { getUserByEmail } from "@/lib/auth";
 import { sendPasswordResetEmail } from "@/lib/mail";
 import { generatePasswordResetToken } from "@/lib/tokens";
-import { z } from "zod";
 
-export const reset = async (values: z.infer<typeof resetSchema>) => {
-  const validatedFields = resetSchema.safeParse(values);
+export const reset = async (values: z.infer<typeof ResetSchema>) => {
+  const validatedFields = ResetSchema.safeParse(values);
 
   if (!validatedFields.success) {
     return { error: "Invalid email!" };

@@ -1,6 +1,7 @@
 import { auth, signOut } from "@/auth";
-import { Flag } from "@/components/flags/flags";
-// import { Coin } from "@/components/coin";
+
+import { Flag } from "@/components/flags";
+// import { Coin } from "@/components";
 
 // export interface ICoin {
 //   id: number;

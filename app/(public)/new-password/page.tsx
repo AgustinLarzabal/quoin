@@ -1,33 +1,31 @@
 "use client";
 
-import { newPassword } from "@/actions/auth";
-import { FormError } from "@/components/form-error";
-import { FormSuccess } from "@/components/form-success";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Icons } from "@/components/ui/icons";
-import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { newPasswordSchema } from "../schemas";
+
+import { newPassword } from "@/actions/auth";
+import { NewPasswordSchema } from "@/app/(public)/schemas";
+import { FormError, FormSuccess } from "@/components";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Icons,
+  Input,
+} from "@/components/ui";
 
 export default function NewPassword() {
   const searchParams = useSearchParams();
@@ -37,14 +35,14 @@ export default function NewPassword() {
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof newPasswordSchema>>({
-    resolver: zodResolver(newPasswordSchema),
+  const form = useForm<z.infer<typeof NewPasswordSchema>>({
+    resolver: zodResolver(NewPasswordSchema),
     defaultValues: {
       password: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof newPasswordSchema>) {
+  async function onSubmit(values: z.infer<typeof NewPasswordSchema>) {
     setError("");
     setSuccess("");
 

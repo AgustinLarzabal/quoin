@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/mode-toggle";
+import { ModeToggle } from "@/components";
 
 export default function AuthLayout({
   children,

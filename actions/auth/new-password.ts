@@ -1,13 +1,15 @@
 "use server";
-import { newPasswordSchema } from "@/app/(public)/schemas";
-import { getUserByEmail } from "@/lib/auth";
-import { db } from "@/lib/db";
-import { getPasswordResetTokenByToken } from "@/lib/password-reset-token";
+
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 
+import { NewPasswordSchema } from "@/app/(public)/schemas";
+import { getUserByEmail } from "@/lib/auth";
+import { db } from "@/lib/db";
+import { getPasswordResetTokenByToken } from "@/lib/password-reset-token";
+
 export const newPassword = async (
-  values: z.infer<typeof newPasswordSchema>,
+  values: z.infer<typeof NewPasswordSchema>,
   token?: string | null
 ) => {
   if (!token) {
@@ -16,7 +18,7 @@ export const newPassword = async (
     };
   }
 
-  const validatedFields = newPasswordSchema.safeParse(values);
+  const validatedFields = NewPasswordSchema.safeParse(values);
 
   if (!validatedFields.success) {
     return {
