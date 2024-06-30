@@ -5,6 +5,7 @@ export const LoginSchema = z.object({
   password: z.string().min(1, {
     message: "Invalid password",
   }),
+  code: z.optional(z.string()),
 });
 
 export const SignUpSchema = z.object({
