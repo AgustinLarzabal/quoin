@@ -1,3 +1,5 @@
+"use client";
+
 import { Settings2, Triangle } from "lucide-react";
 
 import { ModeToggle } from "@/components/mode-toggle";
@@ -8,14 +10,21 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function MainSidebar() {
+  const pathname = usePathname();
+
   return (
     <aside className="inset-y fixed left-0 z-20 flex h-full flex-col border-r">
       <TooltipProvider delayDuration={0}>
         <div className="border-b p-2">
-          <Button variant="outline" size="icon" aria-label="Home">
-            <Triangle className="size-4 fill-foreground" />
+          <Button variant="outline" size="icon" aria-label="Home" asChild>
+            <Link href="/">
+              <Triangle className="size-4 fill-foreground" />
+            </Link>
           </Button>
         </div>
         <nav className="grid gap-1 p-2"></nav>
@@ -23,12 +32,20 @@ export function MainSidebar() {
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
+                className={cn(
+                  pathname === "/settings"
+                    ? "bg-accent text-accent-foreground"
+                    : "",
+                  "rounded-lg"
+                )}
                 variant="ghost"
                 size="icon"
-                className="rounded-lg"
                 aria-label="Settings"
+                asChild
               >
-                <Settings2 className="size-5" />
+                <Link href="/settings/profile">
+                  <Settings2 className="size-5" />
+                </Link>
               </Button>
             </TooltipTrigger>
             <TooltipContent side="right" sideOffset={5}>
