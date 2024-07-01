@@ -1,19 +1,25 @@
+import { auth } from "@/auth";
 import { MainHeader, MainSidebar } from "@/components/layout";
 
 import "@/styles/globals.css";
+import { SessionProvider } from "next-auth/react";
 
-export default function ProtectedLayout({
+export default async function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
+
   return (
-    <div className="grid h-screen w-full pl-[53px]">
-      <MainSidebar />
-      <div className="flex flex-col">
-        <MainHeader />
-        {children}
+    <SessionProvider session={session}>
+      <div className="grid h-screen w-full pl-[53px]">
+        <MainSidebar />
+        <div className="flex flex-col">
+          <MainHeader />
+          {children}
+        </div>
       </div>
-    </div>
+    </SessionProvider>
   );
 }
