@@ -48,7 +48,7 @@ export const SettingsProfileSchema = z
   )
   .refine(
     (data) => {
-      if (data.newPassword && data.password) {
+      if (data.newPassword && !data.password) {
         return false;
       }
 

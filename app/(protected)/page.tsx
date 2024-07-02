@@ -1,5 +1,3 @@
-import { signOut } from "@/auth";
-
 import { Flag } from "@/components/flags";
 import { UserInfo } from "@/components/user-info";
 import { currentUser } from "@/lib/auth";
@@ -49,15 +47,6 @@ export default async function Home() {
           <Flag code="us" />
           <Flag code="za" />
         </div>
-
-        <form
-          action={async () => {
-            "use server";
-            await signOut();
-          }}
-        >
-          <button type="submit">Sign Out</button>
-        </form>
       </div>
     </main>
   );
