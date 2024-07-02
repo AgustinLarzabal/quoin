@@ -6,3 +6,4 @@ export * from "./form-new-verification";
 export * from "./form-reset";
 export * from "./form-signup";
 export * from "./form-success";
+export * from "./role-gate";

@@ -1,6 +1,8 @@
-import { auth, signOut } from "@/auth";
+import { signOut } from "@/auth";
 
 import { Flag } from "@/components/flags";
+import { UserInfo } from "@/components/user-info";
+import { currentUser } from "@/lib/auth";
 // import { Coin } from "@/components";
 
 // export interface ICoin {
@@ -22,7 +24,8 @@ import { Flag } from "@/components/flags";
 // }
 
 export default async function Home() {
-  const session = await auth();
+  const user = await currentUser();
+  // const session = await auth();
   // const data = await getData();
 
   return (
@@ -32,7 +35,8 @@ export default async function Home() {
       </div>
       <div className="flex flex-col flex-wrap gap-4">
         <div>
-          {JSON.stringify(session)}
+          <UserInfo user={user} label="test" />
+          {/* {JSON.stringify(session)} */}
           {/* {data.map((coin: ICoin) => (
           <Coin key={coin.id} {...coin} />
           ))} */}
