@@ -27,6 +27,7 @@ import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 export function FormLogin() {
   // const router = useRouter();
   const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
       ? "Email already in use with different provider!"
@@ -50,7 +51,7 @@ export function FormLogin() {
     setSuccess("");
 
     startTransition(() => {
-      login(values)
+      login(values, callbackUrl)
         .then((data) => {
           if (data?.error) {
             form.reset();
@@ -85,7 +86,7 @@ export function FormLogin() {
 
   const onClick = (provider: "google") => {
     signIn(provider, {
-      callbackUrl: DEFAULT_LOGIN_REDIRECT,
+      callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT,
     });
   };
 
