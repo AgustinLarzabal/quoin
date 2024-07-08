@@ -1,14 +1,15 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { UserRole } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { settingsProfile } from "@/actions/settings";
-import { SettingsProfileSchema } from "@/app/(public)/schemas";
 import { FormError, FormSuccess } from "@/components/auth";
+import { SettingsProfileSchema } from "@/components/settings";
 import {
   Button,
   Form,
@@ -27,7 +28,6 @@ import {
   Switch,
 } from "@/components/ui";
 import { useCurrentUser } from "@/hooks";
-import { UserRole } from "@prisma/client";
 
 export function FormProfile() {
   const user = useCurrentUser();
