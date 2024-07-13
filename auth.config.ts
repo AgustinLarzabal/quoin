@@ -3,8 +3,8 @@ import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 
-import { LoginSchema } from "@/app/(public)/schemas";
 import { getUserByEmail } from "@/data";
+import { LoginSchema } from "@/schemas/auth";
 
 export default {
   providers: [
