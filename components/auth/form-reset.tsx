@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { reset } from "@/actions/auth";
-import { ResetSchema } from "@/app/(public)/schemas";
 import { FormError, FormSuccess } from "@/components/auth";
 import {
   Button,
@@ -19,6 +18,7 @@ import {
   Icons,
   Input,
 } from "@/components/ui";
+import { ResetSchema } from "@/schemas/auth";
 
 export function FormReset() {
   const [error, setError] = useState<string | undefined>("");

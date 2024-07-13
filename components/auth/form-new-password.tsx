@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { newPassword } from "@/actions/auth";
-import { NewPasswordSchema } from "@/app/(public)/schemas";
 import { FormError, FormSuccess } from "@/components/auth";
 import {
   Button,
@@ -20,6 +19,7 @@ import {
   Icons,
   Input,
 } from "@/components/ui";
+import { NewPasswordSchema } from "@/schemas/auth";
 
 export function FormNewPassword() {
   const searchParams = useSearchParams();

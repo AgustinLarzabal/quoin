@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { login } from "@/actions/auth";
-import { LoginSchema } from "@/app/(public)/schemas";
 import { FormError, FormSuccess } from "@/components/auth";
 import {
   Button,
@@ -23,6 +22,7 @@ import {
   Input,
 } from "@/components/ui";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { LoginSchema } from "@/schemas/auth";
 
 export function FormLogin() {
   // const router = useRouter();

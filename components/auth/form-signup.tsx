@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { signUp } from "@/actions/auth";
-import { SignUpSchema } from "@/app/(public)/schemas";
 import { FormError, FormSuccess } from "@/components/auth";
 import {
   Button,
@@ -22,6 +21,7 @@ import {
   Input,
 } from "@/components/ui";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { SignUpSchema } from "@/schemas/auth";
 
 export function SignUpForm() {
   const router = useRouter();
