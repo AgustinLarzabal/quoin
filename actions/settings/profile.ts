@@ -3,10 +3,10 @@
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 
-import { SettingsProfileSchema } from "@/components/settings";
 import { getUserByEmail, getUserById } from "@/data";
 import { db, generateVerificationToken, sendVerificationEmail } from "@/lib";
 import { currentUser } from "@/lib/auth";
+import { SettingsProfileSchema } from "@/schemas/settings";
 
 export const settingsProfile = async (
   values: z.infer<typeof SettingsProfileSchema>

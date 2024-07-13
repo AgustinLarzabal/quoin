@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { FormError, FormSuccess } from "@/components/auth";
-import { SettingsAccountSchema } from "@/components/settings";
 import {
   Button,
   Calendar,
@@ -31,6 +30,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
+import { SettingsAccountSchema } from "@/schemas/settings";
 import { useState, useTransition } from "react";
 
 export function FormAccount() {

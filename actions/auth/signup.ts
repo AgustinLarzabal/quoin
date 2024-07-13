@@ -3,11 +3,11 @@
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 
-import { SignUpSchema } from "@/app/(public)/schemas";
 import { getUserByEmail } from "@/data";
 import { db } from "@/lib/db";
 import { sendVerificationEmail } from "@/lib/mail";
 import { generateVerificationToken } from "@/lib/tokens";
+import { SignUpSchema } from "@/schemas/auth";
 
 export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
   const validatedFields = SignUpSchema.safeParse(values);

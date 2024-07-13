@@ -9,7 +9,6 @@ import { z } from "zod";
 
 import { settingsProfile } from "@/actions/settings";
 import { FormError, FormSuccess } from "@/components/auth";
-import { SettingsProfileSchema } from "@/components/settings";
 import {
   Button,
   Form,
@@ -28,6 +27,7 @@ import {
   Switch,
 } from "@/components/ui";
 import { useCurrentUser } from "@/hooks";
+import { SettingsProfileSchema } from "@/schemas/settings";
 
 export function FormProfile() {
   const user = useCurrentUser();

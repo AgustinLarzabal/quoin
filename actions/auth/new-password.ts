@@ -3,9 +3,9 @@
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 
-import { NewPasswordSchema } from "@/app/(public)/schemas";
 import { getPasswordResetTokenByToken, getUserByEmail } from "@/data";
 import { db } from "@/lib/db";
+import { NewPasswordSchema } from "@/schemas/auth";
 
 export const newPassword = async (
   values: z.infer<typeof NewPasswordSchema>,

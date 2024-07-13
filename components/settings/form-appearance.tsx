@@ -5,7 +5,6 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { SettingsAppearanceSchema } from "@/components/settings/schemas";
 import {
   Button,
   Form,
@@ -18,6 +17,7 @@ import {
   RadioGroup,
   RadioGroupItem,
 } from "@/components/ui";
+import { SettingsAppearanceSchema } from "@/schemas/settings";
 import { FormError, FormSuccess } from "../auth";
 
 export function FormAppearance() {
