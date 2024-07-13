@@ -1,10 +1,11 @@
 "use client";
 
-import { Settings2, Triangle } from "lucide-react";
+import { Settings2 } from "lucide-react";
 
 import { ModeToggle } from "@/components/mode-toggle";
 import {
   Button,
+  Icons,
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -23,7 +24,8 @@ export function MainSidebar() {
         <div className="border-b p-2">
           <Button variant="outline" size="icon" aria-label="Home" asChild>
             <Link href="/">
-              <Triangle className="size-4 fill-foreground" />
+              {/* <Triangle className="size-4 fill-foreground" /> */}
+              <Icons.quoin />
             </Link>
           </Button>
         </div>
