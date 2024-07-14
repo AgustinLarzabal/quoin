@@ -1,4 +1,5 @@
 export * from "./avatar";
+export * from "./badge";
 export * from "./button";
 export * from "./calendar";
 export * from "./card";
@@ -13,4 +14,6 @@ export * from "./radio-group";
 export * from "./select";
 export * from "./separator";
 export * from "./switch";
+export * from "./table";
+export * from "./tabs";
 export * from "./tooltip";
