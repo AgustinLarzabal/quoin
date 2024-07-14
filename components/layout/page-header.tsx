@@ -1,11 +1,11 @@
 import { Separator } from "@/components/ui";
 
 interface PageHeaderProps {
-  title: string;
   subtitle: string;
+  title: string;
 }
 
-export function PageHeader({ title, subtitle }: PageHeaderProps) {
+export function PageHeader({ subtitle, title }: PageHeaderProps) {
   return (
     <>
       <div className="space-y-0.5">
