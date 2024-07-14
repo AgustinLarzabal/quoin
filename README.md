@@ -16,3 +16,4 @@
 - [ ] Add 2FA
 - [ ] Fix tooltip for the mode toggle
 - [ ] Add Input OTP component to the 2FA form.
+- [ ] Add a common page layout component
