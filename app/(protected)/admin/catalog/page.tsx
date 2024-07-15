@@ -1,17 +1,23 @@
 import { TableCoins, TableCountries, TableSeries } from "@/components/catalog";
 import { Main } from "@/components/layout";
 import {
+  Button,
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/ui";
 import { getCoins, getCountries, getSeries } from "@/data/catalog";
+import { PlusCircle } from "lucide-react";
 
 export default async function AdminCatalog() {
   const coins = await getCoins();
@@ -30,6 +36,23 @@ export default async function AdminCatalog() {
             <TabsTrigger value="series">Series</TabsTrigger>
             <TabsTrigger value="countries">Countries</TabsTrigger>
           </TabsList>
+          <div className="ml-auto flex items-center gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button size="sm" className="h-7 gap-1">
+                  <PlusCircle className="h-3.5 w-3.5" />
+                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                    Add
+                  </span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-[150px]">
+                <DropdownMenuItem>Add Coin</DropdownMenuItem>
+                <DropdownMenuItem>Add Series</DropdownMenuItem>
+                <DropdownMenuItem>Add Country</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
         <TabsContent value="coins">
           <Card>
