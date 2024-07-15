@@ -9,3 +9,13 @@ export const getCoins = async () => {
     return null;
   }
 };
+
+export const getSeries = async () => {
+  try {
+    const series = await db.serie.findMany();
+
+    return series;
+  } catch {
+    return null;
+  }
+};

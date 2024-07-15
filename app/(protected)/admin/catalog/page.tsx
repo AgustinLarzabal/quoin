@@ -1,3 +1,4 @@
+import { TableSeries } from "@/components/catalog";
 import { TableCoins } from "@/components/catalog/table-coins";
 import { Main } from "@/components/layout";
 import {
@@ -17,8 +18,6 @@ export default async function AdminCatalog() {
   const coins = await getCoins();
   const series = await getSeries();
   const countries = await getCountries();
-
-  console.log("coins", coins);
 
   return (
     <Main
@@ -43,6 +42,19 @@ export default async function AdminCatalog() {
             </CardHeader>
             <CardContent>
               <TableCoins data={coins} />
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="series">
+          <Card>
+            <CardHeader>
+              <CardTitle>Products</CardTitle>
+              <CardDescription>
+                Manage your products and view their sales performance.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <TableSeries data={series} />
             </CardContent>
           </Card>
         </TabsContent>
