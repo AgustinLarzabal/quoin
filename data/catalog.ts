@@ -19,3 +19,13 @@ export const getSeries = async () => {
     return null;
   }
 };
+
+export const getCountries = async () => {
+  try {
+    const countries = await db.country.findMany();
+
+    return countries;
+  } catch {
+    return null;
+  }
+};

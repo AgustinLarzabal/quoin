@@ -1,5 +1,4 @@
-import { TableSeries } from "@/components/catalog";
-import { TableCoins } from "@/components/catalog/table-coins";
+import { TableCoins, TableCountries, TableSeries } from "@/components/catalog";
 import { Main } from "@/components/layout";
 import {
   Card,
@@ -55,6 +54,19 @@ export default async function AdminCatalog() {
             </CardHeader>
             <CardContent>
               <TableSeries data={series} />
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="countries">
+          <Card>
+            <CardHeader>
+              <CardTitle>Products</CardTitle>
+              <CardDescription>
+                Manage your products and view their sales performance.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <TableCountries data={countries} />
             </CardContent>
           </Card>
         </TabsContent>
