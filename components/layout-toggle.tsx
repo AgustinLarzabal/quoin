@@ -15,8 +15,8 @@ export function LayoutToggle() {
     <div className="ml-4">
       {role === UserRole.ADMIN && (
         <Button variant="secondary" size="sm" asChild>
-          <Link href={pathname === "/admin" ? "/" : "/admin"}>
-            Switch to {pathname === "/admin" ? "User" : "Admin"}
+          <Link href={pathname.startsWith("/admin") ? "/" : "/admin"}>
+            Switch to {pathname.startsWith("/admin") ? "User" : "Admin"}
           </Link>
         </Button>
       )}
