@@ -29,3 +29,15 @@ export const getCountries = async () => {
     return null;
   }
 };
+
+export const getCountryByIsoCode = async (isoCode: string) => {
+  try {
+    const country = await db.country.findUnique({
+      where: { isoCode },
+    });
+
+    return country;
+  } catch {
+    return null;
+  }
+};

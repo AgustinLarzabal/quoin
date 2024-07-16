@@ -18,6 +18,7 @@ import {
 } from "@/components/ui";
 import { getCoins, getCountries, getSeries } from "@/data/catalog";
 import { PlusCircle } from "lucide-react";
+import Link from "next/link";
 
 export default async function AdminCatalog() {
   const coins = await getCoins();
@@ -49,7 +50,9 @@ export default async function AdminCatalog() {
               <DropdownMenuContent align="end" className="w-[150px]">
                 <DropdownMenuItem>Add Coin</DropdownMenuItem>
                 <DropdownMenuItem>Add Series</DropdownMenuItem>
-                <DropdownMenuItem>Add Country</DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/admin/catalog/add-country">Add Country</Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
