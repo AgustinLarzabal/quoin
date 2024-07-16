@@ -9,3 +9,15 @@ export const getSeries = async () => {
     return null;
   }
 };
+
+export const getSeriesByName = async (name: string) => {
+  try {
+    const series = await db.country.findUnique({
+      where: { name },
+    });
+
+    return series;
+  } catch {
+    return null;
+  }
+};
