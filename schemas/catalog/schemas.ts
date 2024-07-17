@@ -6,6 +6,13 @@ export const AddCountrySchema = z.object({
 });
 
 export const AddSeriesSchema = z.object({
-  name: z.string(),
   country: z.string(),
+  name: z.string(),
+});
+
+export const AddCoinSchema = z.object({
+  code: z.string(),
+  country: z.string(),
+  name: z.string(),
+  series: z.string(),
 });

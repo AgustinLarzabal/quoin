@@ -48,7 +48,9 @@ export default async function AdminCatalog() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-[150px]">
-                <DropdownMenuItem>Add Coin</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/admin/catalog/add-coin">Add Coin</Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="/admin/catalog/add-series">Add Series</Link>
                 </DropdownMenuItem>
