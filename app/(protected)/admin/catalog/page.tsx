@@ -25,6 +25,10 @@ export default async function AdminCatalog() {
   const series = await getSeries();
   const countries = await getCountries();
 
+  console.log("coins", coins);
+  console.log("series", series);
+  console.log("countries", countries);
+
   return (
     <Main
       title="Catalog"

@@ -1,8 +1,9 @@
+import { SessionProvider } from "next-auth/react";
+
 import { auth } from "@/auth";
 import { MainHeader, MainSidebar } from "@/components/layout";
 
 import "@/styles/globals.css";
-import { SessionProvider } from "next-auth/react";
 
 export default async function ProtectedLayout({
   children,

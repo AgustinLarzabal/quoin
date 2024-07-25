@@ -2,7 +2,6 @@
 
 import { Book, Settings2 } from "lucide-react";
 
-import { ModeToggle } from "@/components/mode-toggle";
 import {
   Button,
   Icons,
@@ -83,14 +82,14 @@ export function MainSidebar() {
               Settings
             </TooltipContent>
           </Tooltip>
-          <Tooltip>
+          {/* <Tooltip>
             <TooltipTrigger asChild>
               <ModeToggle aria-label="test" />
             </TooltipTrigger>
             <TooltipContent side="right" sideOffset={5}>
               No anda el tooltip
             </TooltipContent>
-          </Tooltip>
+          </Tooltip> */}
         </nav>
       </TooltipProvider>
     </aside>

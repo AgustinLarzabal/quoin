@@ -1,10 +1,10 @@
 import { FormAddCoin } from "@/components/catalog/form-coin";
 import { Main } from "@/components/layout";
-import { getCountries, getSeries } from "@/data/catalog";
+import { getCountries } from "@/data/catalog";
 
 export default async function AddCoinPage() {
   const countries = await getCountries();
-  const series = await getSeries();
+  console.log("GET Countries:", countries);
 
   return (
     <Main

@@ -1,6 +1,5 @@
 "use client";
 
-import { fetchData } from "@/actions/catalog/series";
 import { FormError, FormSuccess } from "@/components/auth";
 import {
   Button,
@@ -26,11 +25,16 @@ import {
 import { cn } from "@/lib/utils";
 import { AddCoinSchema } from "@/schemas/catalog";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Country } from "@prisma/client";
+import { Country, Serie } from "@prisma/client";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+interface SelectOption {
+  label: string;
+  value: string;
+}
 
 interface FormAddCoinProps {
   countries: Country[] | null;
@@ -40,6 +44,7 @@ export function FormAddCoin({ countries }: FormAddCoinProps) {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
+  const [series, setSeries] = useState<SelectOption[]>();
 
   const mappedCountries = countries?.map(({ isoCode, name }) => ({
     label: name,
@@ -57,11 +62,37 @@ export function FormAddCoin({ countries }: FormAddCoinProps) {
   });
 
   const selectedCountry = form.watch("country");
-  console.log("selectedCountry", selectedCountry);
+
+  async function getData() {
+    const selectedCountryID = countries?.find(
+      (country) => country.isoCode === selectedCountry
+    );
+
+    const res = await fetch(
+      `http://localhost:3000/api/catalog/series?countryID=${selectedCountryID?.id}`
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    return res.json();
+  }
 
   useEffect(() => {
-    console.log("useEffect trigerred");
-    fetchData(selectedCountry);
+    console.log("useEffect triggered!");
+    console.log("selectedCountry:", selectedCountry);
+    (async () => {
+      const { data } = await getData();
+      console.log("data", data);
+
+      const mappedSeries = data.map(({ id, name }: Serie) => ({
+        label: name,
+        value: id,
+      }));
+
+      setSeries(mappedSeries);
+    })();
   }, [selectedCountry]);
 
   async function onSubmit(values: z.infer<typeof AddCoinSchema>) {
@@ -93,10 +124,24 @@ export function FormAddCoin({ countries }: FormAddCoinProps) {
 
         <FormField
           control={form.control}
+          name="code"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Code</FormLabel>
+              <FormControl>
+                <Input placeholder="km000" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
           name="country"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Language</FormLabel>
+              <FormLabel>Country</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -129,6 +174,69 @@ export function FormAddCoin({ countries }: FormAddCoinProps) {
                             key={language.value}
                             onSelect={() => {
                               form.setValue("country", language.value);
+                            }}
+                          >
+                            <CheckIcon
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                language.value === field.value
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            {language.label}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+              <FormDescription>
+                This is the language that will be used in the dashboard.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="series"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel>Series</FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      className={cn(
+                        "w-[200px] justify-between",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      {field.value
+                        ? series?.find((series) => series.value === field.value)
+                            ?.label
+                        : "Select serie"}
+                      <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-[200px] p-0">
+                  <Command>
+                    <CommandInput placeholder="Search language..." />
+                    <CommandEmpty>No serie found.</CommandEmpty>
+                    <CommandList>
+                      <CommandGroup>
+                        {series?.map((language) => (
+                          <CommandItem
+                            value={language.label}
+                            key={language.value}
+                            onSelect={() => {
+                              form.setValue("series", language.value);
                             }}
                           >
                             <CheckIcon
