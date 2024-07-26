@@ -30,7 +30,6 @@ export const getSeriesByCountry = async (countryID: string) => {
 
     return series;
   } catch (error) {
-    console.log("getSeriesByCountry error", error);
     return null;
   }
 };
