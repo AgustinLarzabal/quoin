@@ -11,6 +11,7 @@ model Country {
   continent Continent
   isoCode   String  @unique
   name      String  @unique
+  slug      String  @unique
   
   coins     Coin[]
   series    Serie[]

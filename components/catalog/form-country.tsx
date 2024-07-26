@@ -38,6 +38,7 @@ export function FormAddCountry() {
       isoCode: undefined,
       continent: undefined,
       name: undefined,
+      slug: undefined,
     },
   });
 
@@ -77,6 +78,20 @@ export function FormAddCountry() {
               <FormLabel>isoCode</FormLabel>
               <FormControl>
                 <Input placeholder="ES" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="slug"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>slug</FormLabel>
+              <FormControl>
+                <Input placeholder="spain" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
