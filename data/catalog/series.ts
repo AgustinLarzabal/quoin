@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import { capitalizeAllFirstLetters } from "@/utils";
 
 export const getSeries = async () => {
   try {
@@ -34,10 +35,10 @@ export const getSeriesByCountry = async (countryID: string) => {
   }
 };
 
-export const getSeriesByCountrySlug = async (slug: string) => {
+export const getSeriesByCountryName = async (name: string) => {
   try {
     const country = await db.country.findUnique({
-      where: { slug },
+      where: { name: capitalizeAllFirstLetters(name) },
     });
 
     if (!country) return null;

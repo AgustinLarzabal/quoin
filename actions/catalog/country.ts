@@ -14,7 +14,7 @@ export const addCountry = async (values: z.infer<typeof AddCountrySchema>) => {
     return { error: "Invalid fields" };
   }
 
-  const { isoCode, continent, name, slug } = validatedFields.data;
+  const { isoCode, continent, name } = validatedFields.data;
 
   const existingCountry = await getCountryByIsoCode(isoCode.toUpperCase());
 
@@ -27,7 +27,6 @@ export const addCountry = async (values: z.infer<typeof AddCountrySchema>) => {
       isoCode: isoCode.toUpperCase(),
       continent,
       name: capitalizeAllFirstLetters(name),
-      slug: slug.toLowerCase(),
     },
   });
 

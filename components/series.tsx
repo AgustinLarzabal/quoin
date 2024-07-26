@@ -4,12 +4,13 @@ type CountryProps = {
   count: number;
   country: string;
   name: string;
+  slug: string;
 };
 
-export function Serie({ count, country, name }: CountryProps) {
+export function Serie({ count, country, name, slug }: CountryProps) {
   return (
     <Link
-      href={`/catalog/${country}`}
+      href={`/catalog/${country}/${slug}`}
       className="border inline-flex items-center gap-2 rounded-md text-sm font-medium hover:bg-accent hover:text-accent-foreground px-3 py-1 transition-colors"
     >
       {name}

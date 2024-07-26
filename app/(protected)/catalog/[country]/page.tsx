@@ -1,12 +1,15 @@
 import { Serie } from "@/components/series";
-import { getSeriesByCountrySlug } from "@/data/catalog";
+import { getSeriesByCountryName } from "@/data/catalog";
+import { createSlug } from "@/utils";
 
 export default async function CatalogCountryPage({
   params,
 }: {
   params: { country: string };
 }) {
-  const series = await getSeriesByCountrySlug(params.country);
+  console.log("params.country", params.country);
+  const series = await getSeriesByCountryName(params.country);
+  console.log("series", series);
 
   return (
     <div className="flex gap-6">
@@ -16,6 +19,7 @@ export default async function CatalogCountryPage({
           count={_count.coins}
           country={params.country}
           name={name}
+          slug={createSlug(name)}
         />
       ))}
     </div>

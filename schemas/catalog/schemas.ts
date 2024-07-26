@@ -5,7 +5,6 @@ export const AddCountrySchema = z.object({
   isoCode: z.string(),
   continent: z.nativeEnum(Continent),
   name: z.string(),
-  slug: z.string(),
 });
 
 export const AddSeriesSchema = z.object({
