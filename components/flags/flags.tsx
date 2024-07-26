@@ -12,7 +12,7 @@ export const Flag = ({ code, ...props }: FlagProps) => {
       return <AR {...props} />;
     case "cn":
       return <CN {...props} />;
-    case "es":
+    case "ES":
       return <ES {...props} />;
     case "us":
       return <US {...props} />;

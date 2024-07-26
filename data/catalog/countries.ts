@@ -2,7 +2,13 @@ import { db } from "@/lib/db";
 
 export const getCountries = async () => {
   try {
-    const countries = await db.country.findMany();
+    const countries = await db.country.findMany({
+      include: {
+        _count: {
+          select: { coins: true },
+        },
+      },
+    });
 
     return countries;
   } catch {

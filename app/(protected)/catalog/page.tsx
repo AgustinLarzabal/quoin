@@ -1,16 +1,21 @@
-import { Coin } from "@/components/coin";
+import { Country } from "@/components/country";
 import { Main } from "@/components/layout";
-import { getCoins } from "@/data/catalog";
+import { getCountries } from "@/data/catalog";
 
 export default async function Catalog() {
-  const coins = await getCoins();
-  console.log("[PROTECTED Catalog]", coins);
+  const countries = await getCountries();
 
   return (
     <Main title="Catalog" subtitle="Our entire world coins catalog">
       <div className="flex gap-6">
-        {coins?.map((coin) => (
-          <Coin key={coin.id} name={coin.name} country={coin.country.isoCode} />
+        {countries?.map(({ id, _count, isoCode, name, slug }) => (
+          <Country
+            key={id}
+            count={_count.coins}
+            isoCode={isoCode}
+            name={name}
+            slug={slug}
+          />
         ))}
       </div>
     </Main>
