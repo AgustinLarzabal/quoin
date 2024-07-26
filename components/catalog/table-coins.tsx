@@ -15,9 +15,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui";
-import { Coin } from "@prisma/client";
 
-export function TableCoins({ data }: { data: Coin[] | null }) {
+// TODO: Made proper types and DTOs
+type Coin = {
+  id: string;
+  code: string;
+  name: string;
+  country: string;
+  series: string;
+};
+
+export function TableCoins({ data }: { data: Coin[] | undefined }) {
   return (
     <Table>
       <TableHeader>
@@ -27,13 +35,15 @@ export function TableCoins({ data }: { data: Coin[] | null }) {
           </TableHead>
           <TableHead>Name</TableHead>
           <TableHead>Code</TableHead>
+          <TableHead>Country</TableHead>
+          <TableHead>Series</TableHead>
           <TableHead>
             <span className="sr-only">Actions</span>
           </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data?.map(({ id, code, name }) => (
+        {data?.map(({ id, code, country, series, name }) => (
           <TableRow key={id}>
             <TableCell className="hidden sm:table-cell">
               <Image
@@ -46,6 +56,8 @@ export function TableCoins({ data }: { data: Coin[] | null }) {
             </TableCell>
             <TableCell className="font-medium">{name}</TableCell>
             <TableCell>{code}</TableCell>
+            <TableCell>{country}</TableCell>
+            <TableCell>{series}</TableCell>
             <TableCell>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

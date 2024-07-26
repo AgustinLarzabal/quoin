@@ -17,6 +17,7 @@ import {
   TabsTrigger,
 } from "@/components/ui";
 import { getCoins, getCountries, getSeries } from "@/data/catalog";
+import { Coin } from "@prisma/client";
 import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 
@@ -25,9 +26,16 @@ export default async function AdminCatalog() {
   const series = await getSeries();
   const countries = await getCountries();
 
-  console.log("coins", coins);
-  console.log("series", series);
-  console.log("countries", countries);
+  const mappedCoins = ({ id, code, name, countryID, seriesID }: Coin) => {
+    return {
+      id,
+      code,
+      name,
+      country:
+        countries?.find((country) => country.id === countryID)?.name ?? "",
+      series: series?.find((series) => series.id === seriesID)?.name ?? "",
+    };
+  };
 
   return (
     <Main
@@ -74,7 +82,7 @@ export default async function AdminCatalog() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <TableCoins data={coins} />
+              <TableCoins data={coins?.map(mappedCoins)} />
             </CardContent>
           </Card>
         </TabsContent>
