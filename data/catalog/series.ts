@@ -33,3 +33,26 @@ export const getSeriesByCountry = async (countryID: string) => {
     return null;
   }
 };
+
+export const getSeriesByCountrySlug = async (slug: string) => {
+  try {
+    const country = await db.country.findUnique({
+      where: { slug },
+    });
+
+    if (!country) return null;
+
+    const series = await db.serie.findMany({
+      where: { countryID: country.id },
+      include: {
+        _count: {
+          select: { coins: true },
+        },
+      },
+    });
+
+    return series;
+  } catch (error) {
+    return null;
+  }
+};
