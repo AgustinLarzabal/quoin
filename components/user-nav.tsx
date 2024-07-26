@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui";
 import { useCurrentUser } from "@/hooks";
+import Link from "next/link";
 
 export function UserNav() {
   const user = useCurrentUser();
@@ -28,6 +29,9 @@ export function UserNav() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
+        <DropdownMenuItem asChild>
+          <Link href="/settings/profile">Settings</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
