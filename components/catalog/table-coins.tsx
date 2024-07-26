@@ -1,3 +1,4 @@
+import { type Coin } from "@/types/catalog";
 import { MoreHorizontal } from "lucide-react";
 import Image from "next/image";
 
@@ -15,15 +16,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui";
-
-// TODO: Made proper types and DTOs
-type Coin = {
-  id: string;
-  code: string;
-  name: string;
-  country: string;
-  series: string;
-};
 
 export function TableCoins({ data }: { data: Coin[] | undefined }) {
   return (

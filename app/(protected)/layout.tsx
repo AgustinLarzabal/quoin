@@ -14,7 +14,7 @@ export default async function ProtectedLayout({
 
   return (
     <SessionProvider session={session}>
-      <div className="grid h-screen w-full pl-[53px]">
+      <div className="h-screen w-full pl-[53px]">
         <MainSidebar />
         <div className="flex flex-col">
           <MainHeader />

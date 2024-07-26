@@ -3,16 +3,14 @@ import Image from "next/image";
 interface CoinProps {
   name: string;
   country: string;
-  year: string;
-  cover: string;
 }
 
-export function Coin({ name, country, year, cover }: CoinProps) {
+export function Coin({ name, country }: CoinProps) {
   return (
     <div className="w-[250px] border rounded-md">
       <div className="overflow-hidden rounded-t-md p-2">
         <Image
-          src={cover}
+          src="/Espana-2014-Park-Guell.webp"
           alt={name}
           width="250"
           height="250"
@@ -22,7 +20,6 @@ export function Coin({ name, country, year, cover }: CoinProps) {
       <div className="space-y-1 text-sm p-2">
         <h3 className="font-medium leading-none">{name}</h3>
         <p className="text-xs text-muted-foreground">{country}</p>
-        <p className="text-xs text-muted-foreground">{year}</p>
       </div>
     </div>
   );
