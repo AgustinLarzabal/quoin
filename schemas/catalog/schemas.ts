@@ -1,7 +1,9 @@
+import { Continent } from "@prisma/client";
 import { z } from "zod";
 
 export const AddCountrySchema = z.object({
   isoCode: z.string(),
+  continent: z.nativeEnum(Continent),
   name: z.string(),
 });
 

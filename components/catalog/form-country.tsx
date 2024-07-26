@@ -17,8 +17,15 @@ import {
   FormMessage,
   Icons,
   Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui";
 import { AddCountrySchema } from "@/schemas/catalog";
+import { capitalizeFirstLetter } from "@/utils";
+import { Continent } from "@prisma/client";
 
 export function FormAddCountry() {
   const [isPending, startTransition] = useTransition();
@@ -29,6 +36,7 @@ export function FormAddCountry() {
     resolver: zodResolver(AddCountrySchema),
     defaultValues: {
       isoCode: undefined,
+      continent: undefined,
       name: undefined,
     },
   });
@@ -70,6 +78,31 @@ export function FormAddCountry() {
               <FormControl>
                 <Input placeholder="ES" {...field} />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="continent"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Continent</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a continent" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {Object.keys(Continent).map((cont) => (
+                    <SelectItem key={cont} value={cont}>
+                      {capitalizeFirstLetter(cont)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}

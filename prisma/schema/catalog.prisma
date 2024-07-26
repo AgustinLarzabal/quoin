@@ -1,5 +1,14 @@
+enum Continent {
+  AFRICA
+  AMERICA
+  ASIA
+  EUROPE
+  OCEANIA
+}
+
 model Country {
   id        String  @id @default(uuid())
+  continent Continent
   isoCode   String  @unique
   name      String  @unique
   

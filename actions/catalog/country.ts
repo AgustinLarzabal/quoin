@@ -5,7 +5,7 @@ import { z } from "zod";
 import { getCountryById, getCountryByIsoCode } from "@/data/catalog";
 import { db } from "@/lib/db";
 import { AddCountrySchema } from "@/schemas/catalog";
-import { capitalizeAllFirstLetters, capitalizeFirstLetter } from "@/utils";
+import { capitalizeAllFirstLetters } from "@/utils";
 
 export const addCountry = async (values: z.infer<typeof AddCountrySchema>) => {
   const validatedFields = AddCountrySchema.safeParse(values);
@@ -14,9 +14,9 @@ export const addCountry = async (values: z.infer<typeof AddCountrySchema>) => {
     return { error: "Invalid fields" };
   }
 
-  const { isoCode, name } = validatedFields.data;
+  const { isoCode, continent, name } = validatedFields.data;
 
-  const existingCountry = await getCountryByIsoCode(isoCode);
+  const existingCountry = await getCountryByIsoCode(isoCode.toUpperCase());
 
   if (existingCountry) {
     return { error: "Country already exist!" };
@@ -24,7 +24,8 @@ export const addCountry = async (values: z.infer<typeof AddCountrySchema>) => {
 
   await db.country.create({
     data: {
-      isoCode: capitalizeFirstLetter(isoCode),
+      isoCode: isoCode.toUpperCase(),
+      continent,
       name: capitalizeAllFirstLetters(name),
     },
   });
