@@ -7,9 +7,7 @@ export default async function CatalogCountryPage({
 }: {
   params: { country: string };
 }) {
-  console.log("params.country", params.country);
   const series = await getSeriesByCountryName(params.country);
-  console.log("series", series);
 
   return (
     <div className="flex gap-6">

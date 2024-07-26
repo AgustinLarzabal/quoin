@@ -15,3 +15,11 @@ export const createSlug = (str: string) => {
 
   return slug;
 };
+
+export const reverseSlug = (slug: string) => {
+  let str = slug.replace(/-/g, " ");
+  str = capitalizeAllFirstLetters(str);
+  str = str.trim();
+
+  return str;
+};
