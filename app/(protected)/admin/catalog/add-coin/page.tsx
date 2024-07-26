@@ -4,7 +4,6 @@ import { getCountries } from "@/data/catalog";
 
 export default async function AddCoinPage() {
   const countries = await getCountries();
-  console.log("GET Countries:", countries);
 
   return (
     <Main

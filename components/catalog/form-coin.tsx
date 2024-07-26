@@ -1,5 +1,7 @@
 "use client";
 
+import { addCoin } from "@/actions/catalog/coin";
+import { getSeriesByCountryID } from "@/actions/catalog/series";
 import { FormError, FormSuccess } from "@/components/auth";
 import {
   Button,
@@ -27,7 +29,7 @@ import { AddCoinSchema } from "@/schemas/catalog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Country, Serie } from "@prisma/client";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -44,11 +46,18 @@ export function FormAddCoin({ countries }: FormAddCoinProps) {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
-  const [series, setSeries] = useState<SelectOption[]>();
+  const [countryOpen, setCountryOpen] = useState(false);
+  const [seriesOpen, setSeriesOpen] = useState(false);
+  const [series, setSeries] = useState<Serie[] | null>();
 
-  const mappedCountries = countries?.map(({ isoCode, name }) => ({
+  const mappedCountries = countries?.map(({ id, name }) => ({
     label: name,
-    value: isoCode,
+    value: id,
+  }));
+
+  const mappedSeries = series?.map(({ id, name }) => ({
+    label: name,
+    value: id,
   }));
 
   const form = useForm<z.infer<typeof AddCoinSchema>>({
@@ -61,48 +70,19 @@ export function FormAddCoin({ countries }: FormAddCoinProps) {
     },
   });
 
-  const selectedCountry = form.watch("country");
-
-  async function getData() {
-    const selectedCountryID = countries?.find(
-      (country) => country.isoCode === selectedCountry
-    );
-
-    const res = await fetch(
-      `http://localhost:3000/api/catalog/series?countryID=${selectedCountryID?.id}`
-    );
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch data");
-    }
-
-    return res.json();
+  async function getSeries(selectedCountry: string) {
+    const data = await getSeriesByCountryID(selectedCountry);
+    setSeries(data);
   }
-
-  useEffect(() => {
-    console.log("useEffect triggered!");
-    console.log("selectedCountry:", selectedCountry);
-    (async () => {
-      const { data } = await getData();
-      console.log("data", data);
-
-      const mappedSeries = data.map(({ id, name }: Serie) => ({
-        label: name,
-        value: id,
-      }));
-
-      setSeries(mappedSeries);
-    })();
-  }, [selectedCountry]);
 
   async function onSubmit(values: z.infer<typeof AddCoinSchema>) {
     startTransition(() => {
-      // addSeries(values)
-      //   .then((data) => {
-      //     setError(data?.error);
-      //     setSuccess(data?.success);
-      //   })
-      //   .catch(() => setError("Something went wrong!"));
+      addCoin(values)
+        .then((data) => {
+          setError(data?.error);
+          setSuccess(data?.success);
+        })
+        .catch(() => setError("Something went wrong!"));
     });
   }
   return (
@@ -142,7 +122,7 @@ export function FormAddCoin({ countries }: FormAddCoinProps) {
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel>Country</FormLabel>
-              <Popover>
+              <Popover open={countryOpen} onOpenChange={setCountryOpen}>
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
@@ -174,6 +154,8 @@ export function FormAddCoin({ countries }: FormAddCoinProps) {
                             key={language.value}
                             onSelect={() => {
                               form.setValue("country", language.value);
+                              getSeries(language.value);
+                              setCountryOpen(false);
                             }}
                           >
                             <CheckIcon
@@ -206,7 +188,7 @@ export function FormAddCoin({ countries }: FormAddCoinProps) {
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel>Series</FormLabel>
-              <Popover>
+              <Popover open={seriesOpen} onOpenChange={setSeriesOpen}>
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
@@ -218,8 +200,9 @@ export function FormAddCoin({ countries }: FormAddCoinProps) {
                       )}
                     >
                       {field.value
-                        ? series?.find((series) => series.value === field.value)
-                            ?.label
+                        ? mappedSeries?.find(
+                            (series) => series.value === field.value
+                          )?.label
                         : "Select serie"}
                       <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
@@ -231,12 +214,13 @@ export function FormAddCoin({ countries }: FormAddCoinProps) {
                     <CommandEmpty>No serie found.</CommandEmpty>
                     <CommandList>
                       <CommandGroup>
-                        {series?.map((language) => (
+                        {mappedSeries?.map((language) => (
                           <CommandItem
                             value={language.label}
                             key={language.value}
                             onSelect={() => {
                               form.setValue("series", language.value);
+                              setSeriesOpen(false);
                             }}
                           >
                             <CheckIcon
@@ -268,7 +252,7 @@ export function FormAddCoin({ countries }: FormAddCoinProps) {
 
         <Button disabled={isPending} type="submit">
           {isPending && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
-          Add series
+          Add Coin
         </Button>
       </form>
     </Form>

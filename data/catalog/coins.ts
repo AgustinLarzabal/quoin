@@ -9,3 +9,15 @@ export const getCoins = async () => {
     return null;
   }
 };
+
+export const getCoinByName = async (name: string) => {
+  try {
+    const coin = await db.coin.findFirst({
+      where: { name },
+    });
+
+    return coin;
+  } catch {
+    return null;
+  }
+};

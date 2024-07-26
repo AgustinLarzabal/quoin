@@ -1,6 +1,10 @@
 "use server";
 
-import { getCountryByIsoCode, getSeriesByName } from "@/data/catalog";
+import {
+  getCountryByIsoCode,
+  getSeriesByCountry,
+  getSeriesByName,
+} from "@/data/catalog";
 import { db } from "@/lib/db";
 import { AddSeriesSchema } from "@/schemas/catalog";
 import { capitalizeAllFirstLetters } from "@/utils";
@@ -36,3 +40,6 @@ export const addSeries = async (values: z.infer<typeof AddSeriesSchema>) => {
 
   return { success: "Series created!" };
 };
+
+export const getSeriesByCountryID = async (countryID: string) =>
+  getSeriesByCountry(countryID);
