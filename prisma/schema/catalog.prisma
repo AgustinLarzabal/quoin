@@ -14,6 +14,9 @@ model Country {
   
   coins     Coin[]
   series    Serie[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Serie {
@@ -24,6 +27,9 @@ model Serie {
 
   countryID   String
   country     Country @relation(fields: [countryID], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 
@@ -37,4 +43,7 @@ model Coin {
 
   seriesID    String
   series      Serie @relation(fields: [seriesID], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
