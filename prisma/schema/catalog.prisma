@@ -7,7 +7,7 @@ enum Continent {
 }
 
 model Country {
-  id        String  @id @default(uuid())
+  id        String  @id @default(cuid())
   continent Continent
   isoCode   String  @unique
   name      String  @unique
@@ -17,7 +17,7 @@ model Country {
 }
 
 model Serie {
-  id        String  @id @default(uuid())
+  id        String  @id @default(cuid())
   name      String
 
   coins     Coin[]
@@ -28,7 +28,7 @@ model Serie {
 
 
 model Coin {
-  id          String  @id @default(uuid())
+  id          String  @id @default(cuid())
   code        String
   name        String
   
