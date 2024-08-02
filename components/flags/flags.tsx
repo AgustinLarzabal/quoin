@@ -8,7 +8,7 @@ export const Flag = ({ code, ...props }: FlagProps) => {
   switch (code) {
     case "au":
       return <AU {...props} />;
-    case "ar":
+    case "AR":
       return <AR {...props} />;
     case "cn":
       return <CN {...props} />;

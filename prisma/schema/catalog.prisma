@@ -7,42 +7,43 @@ enum Continent {
 }
 
 model Country {
-  id        String  @id @default(cuid())
+  id        String    @id @default(cuid())
   continent Continent
-  isoCode   String  @unique
-  name      String  @unique
-  
-  coins     Coin[]
-  series    Serie[]
+  isoCode   String    @unique
+  name      String    @unique
+  slug      String    @unique
+
+  coins  Coin[]
+  series Serie[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Serie {
-  id        String  @id @default(cuid())
-  name      String
+  id   String @id @default(cuid())
+  name String
+  slug String
 
-  coins     Coin[]
+  coins Coin[]
 
-  countryID   String
-  country     Country @relation(fields: [countryID], references: [id])
+  countryID String
+  country   Country @relation(fields: [countryID], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-
 model Coin {
-  id          String  @id @default(cuid())
-  code        String
-  name        String
-  
-  countryID   String
-  country     Country @relation(fields: [countryID], references: [id])
+  id   String @id @default(cuid())
+  code String
+  name String
 
-  seriesID    String
-  series      Serie @relation(fields: [seriesID], references: [id])
+  countryID String
+  country   Country @relation(fields: [countryID], references: [id])
+
+  seriesID String
+  series   Serie  @relation(fields: [seriesID], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

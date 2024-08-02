@@ -1,5 +1,4 @@
 import { db } from "@/lib/db";
-import { reverseSlug } from "@/utils";
 
 export const getCoins = async () => {
   try {
@@ -28,15 +27,19 @@ export const getCoinByName = async (name: string) => {
   }
 };
 
-export const getCoinsBySeriesName = async (name: string) => {
+export const getCoinsBySeriesName = async (country: string, series: string) => {
   try {
-    const series = await db.serie.findFirst({
-      where: { name: reverseSlug(name) },
-      include: {
-        coins: true,
+    const data = await db.coin.findMany({
+      where: {
+        country: {
+          slug: country,
+        },
+        series: {
+          slug: series,
+        },
       },
     });
-    return series;
+    return data;
   } catch {
     return null;
   }
