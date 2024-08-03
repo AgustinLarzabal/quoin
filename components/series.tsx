@@ -10,7 +10,7 @@ type CountryProps = {
 export function Serie({ count, country, name, slug }: CountryProps) {
   return (
     <Link
-      href={`/catalog/${country}/${slug}`}
+      href={`${country}/${slug}`}
       className="border inline-flex items-center gap-2 rounded-md text-sm font-medium hover:bg-accent hover:text-accent-foreground px-3 py-1 transition-colors"
     >
       {name}

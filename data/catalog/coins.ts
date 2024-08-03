@@ -38,8 +38,34 @@ export const getCoinsBySeriesName = async (country: string, series: string) => {
           slug: series,
         },
       },
+      include: {
+        country: {
+          select: {
+            isoCode: true,
+            name: true,
+          },
+        },
+      },
     });
     return data;
+  } catch {
+    return null;
+  }
+};
+
+export const getCoinById = async (id: string) => {
+  try {
+    const coin = await db.coin.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        country: true,
+        series: true,
+      },
+    });
+
+    return coin;
   } catch {
     return null;
   }

@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { Flag } from "@/components/flags";
+
 const Header = ({ children }: { children: React.ReactNode }) => {
   return <div className="overflow-hidden rounded-t-md p-2">{children}</div>;
 };
@@ -24,8 +26,19 @@ const Name = ({ name }: { name: string }) => {
   return <h3 className="font-medium leading-none">{name}</h3>;
 };
 
-const Country = ({ country }: { country: string }) => {
-  return <p className="text-xs text-muted-foreground">{country}</p>;
+const Country = ({
+  country,
+  isoCode,
+}: {
+  country: string;
+  isoCode: string;
+}) => {
+  return (
+    <p className="text-xs text-muted-foreground inline-flex items-center gap-1">
+      <Flag code={isoCode} className="w-6" />
+      {country}
+    </p>
+  );
 };
 
 export function Coin({ children }: { children: React.ReactNode }) {
