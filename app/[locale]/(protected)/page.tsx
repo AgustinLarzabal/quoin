@@ -1,4 +1,3 @@
-import { SignOutButton } from "@/components/sign-out-button";
 import { getI18n } from "@/locales/server";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
@@ -17,9 +16,9 @@ export default async function Page() {
 
   return (
     <>
-      <p>Protected Page</p>
+      {/* <p>Protected Page</p>
       <p>{t("hello")}</p>
-      <SignOutButton />
+      <SignOutButton /> */}
     </>
   );
 }
