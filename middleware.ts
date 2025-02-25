@@ -1,3 +1,4 @@
+import { updateSession } from "@/utils/supabase/middleware";
 import { createI18nMiddleware } from "next-international/middleware";
 import type { NextRequest } from "next/server";
 
@@ -7,8 +8,8 @@ const I18nMiddleware = createI18nMiddleware({
   urlMappingStrategy: "rewrite",
 });
 
-export function middleware(request: NextRequest) {
-  return I18nMiddleware(request);
+export async function middleware(request: NextRequest) {
+  return await updateSession(request, I18nMiddleware(request));
 }
 
 export const config = {
