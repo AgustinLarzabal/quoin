@@ -1,4 +1,5 @@
 import { Logo } from "@/components/logo";
+import { UserMenu } from "@/components/user-menu";
 import { Menu } from "lucide-react";
 
 export function Header() {
@@ -9,6 +10,12 @@ export function Header() {
       </div>
 
       <div className="flex flex-1 justify-center">Header</div>
+
+      <div className="flex h-full items-center justify-end md:px-4">
+        <div className="hidden md:flex">
+          <UserMenu />
+        </div>
+      </div>
 
       <div className="border-border flex size-[70px] items-center justify-center border-l md:hidden">
         <Menu />
