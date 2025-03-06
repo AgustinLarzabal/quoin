@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth-client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export function UserMenu() {
@@ -43,6 +44,12 @@ export function UserMenu() {
           <span className="text-primary text-sm">{session?.user.name}</span>
           <span className="text-xs">{session?.user.email}</span>
         </div>
+        <DropdownMenuSeparator />
+        <Link href="/settings">
+          <DropdownMenuItem className="text-sm">
+            Account Settings
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleSignOut}>Sign out</DropdownMenuItem>
       </DropdownMenuContent>

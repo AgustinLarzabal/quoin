@@ -12,7 +12,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard } from "lucide-react";
+import { LayoutDashboard, Settings } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -24,6 +24,11 @@ export function Sidebar() {
       icon: LayoutDashboard,
       path: "/",
       isActive: pathname.endsWith("/"),
+    },
+    {
+      icon: Settings,
+      path: "/settings",
+      isActive: pathname.endsWith("/settings"),
     },
   ];
 
