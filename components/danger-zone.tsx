@@ -1,8 +1,11 @@
 "use client";
 
+import { deleteUserAction } from "@/app/actions/delete-user-action";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
+import { Loader2 } from "lucide-react";
+import { useState, useTransition } from "react";
 import {
   Dialog,
   DialogContent,
@@ -16,6 +19,8 @@ import { Input } from "./ui/input";
 export function DangerZone() {
   const [open, setOpen] = useState(false);
   const [deleteText, setDeleteText] = useState("");
+  const [isPending, startTransition] = useTransition();
+  const { data: session } = authClient.useSession();
 
   return (
     <div className="mb-8">
@@ -52,10 +57,20 @@ export function DangerZone() {
                 </Button>
                 <Button
                   variant="destructive"
-                  onClick={() => {}}
-                  disabled={deleteText !== "DELETE"}
+                  onClick={() => {
+                    console.log("session?.user?.id", session?.user?.id);
+                    if (!session?.user?.id) return;
+                    startTransition(async () => {
+                      await deleteUserAction({ userId: session.user.id });
+                    });
+                  }}
+                  disabled={deleteText !== "DELETE" || !session?.user?.id}
                 >
-                  Confirm Delete
+                  {isPending ? (
+                    <Loader2 className="animate-spin" />
+                  ) : (
+                    "Confirm Delete"
+                  )}
                 </Button>
               </div>
             </DialogContent>
