@@ -54,7 +54,7 @@
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.985 0 0);
   --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
+  --secondary: oklch(0.63 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
@@ -127,4 +127,13 @@
     @apply bg-background text-foreground;
     font-family: var(--font-geist-mono), Arial, Helvetica, sans-serif;
   }
+}
+
+.bg-dotted {
+  background-image: radial-gradient(
+    circle at 2px 2px,
+    #232323 1px,
+    transparent 0
+  );
+  background-size: 2.5px 2.5px;
 }
