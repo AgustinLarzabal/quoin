@@ -55,7 +55,7 @@ export function Sidebar() {
                     <SidebarMenuButton
                       asChild
                       isActive={item.isActive}
-                      className={cn("size-[70px] [&>svg]:size-5", {
+                      className={cn("h-[70px] [&>svg]:size-5", {
                         "opacity-50": !item.isActive,
                       })}
                     >
