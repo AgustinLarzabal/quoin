@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteUserAction } from "@/app/actions/delete-user-action";
+import { deleteAccountAction } from "@/app/actions/delete-account-action";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
@@ -57,13 +57,11 @@ export function DangerZone() {
                 </Button>
                 <Button
                   variant="destructive"
-                  onClick={() => {
-                    console.log("session?.user?.id", session?.user?.id);
-                    if (!session?.user?.id) return;
+                  onClick={() =>
                     startTransition(async () => {
-                      await deleteUserAction({ userId: session.user.id });
-                    });
-                  }}
+                      await deleteAccountAction();
+                    })
+                  }
                   disabled={deleteText !== "DELETE" || !session?.user?.id}
                 >
                   {isPending ? (

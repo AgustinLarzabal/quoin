@@ -4,10 +4,16 @@ import {
   DEFAULT_SERVER_ERROR_MESSAGE,
 } from "next-safe-action";
 import { headers } from "next/headers";
+import { z } from "zod";
 
 export class ActionError extends Error {}
 
 export const actionClient = createSafeActionClient({
+  defineMetadataSchema() {
+    return z.object({
+      actionName: z.string(),
+    });
+  },
   handleServerError(e) {
     if (e instanceof Error) {
       return e.message;
@@ -17,19 +23,18 @@ export const actionClient = createSafeActionClient({
   },
 });
 
-export const authAction = actionClient.use(async ({ next }) => {
+export const authActionClient = actionClient.use(async ({ next }) => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
   if (!session) {
-    console.error("Unauthorized");
-    throw new ActionError("Unauthorized");
+    throw new Error("Session not found!");
   }
 
   return next({
     ctx: {
-      session,
+      userId: session.user.id,
     },
   });
 });
