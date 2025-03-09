@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { user } from "@/db/schema";
+import { user } from "@/db/users";
 import { authClient } from "@/lib/auth-client";
 import { authActionClient } from "@/lib/safe-action";
 import { eq } from "drizzle-orm";
